@@ -7,13 +7,13 @@
 #include "MyActor.generated.h"
 
 UCLASS()
-class UNREALLEARN_API AMyActor : public AActor
+class UNREALLEARN_API ATestActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AMyActor();
+	ATestActor();
 
 protected:
 	// Called when the game starts or when spawned
