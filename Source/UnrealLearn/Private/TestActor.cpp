@@ -14,6 +14,10 @@ ATestActor::ATestActor()
 
 }
 
+ATestActor::ATestActor(const FObjectInitializer& ObjectInitializer)
+{
+}
+
 // Called when the game starts or when spawned
 void ATestActor::BeginPlay()
 {
