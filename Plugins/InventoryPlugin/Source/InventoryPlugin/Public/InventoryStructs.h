@@ -7,11 +7,17 @@ struct FItemStruct
 {
 	GENERATED_BODY()
 
-	FItemStruct(UItemPDABase* Itempda): ItemPDA(nullptr), Durability(100){}
-	
-	FItemStruct(UItemPDABase* ItemPda, float Durability) : ItemPDA(ItemPda), Durability(Durability)
+	FItemStruct(): ItemPDA(nullptr), Durability(0)
+	{
+	}
+
+	FItemStruct(UItemPDABase* Itempda): ItemPDA(Itempda), Durability(100), Id(FGuid::NewGuid())
 	{
 		
+	}
+	
+	FItemStruct(UItemPDABase* ItemPda, float Durability) : ItemPDA(ItemPda), Durability(Durability), Id(FGuid::NewGuid())
+	{
 	}
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -19,4 +25,11 @@ struct FItemStruct
 
 	UPROPERTY(BlueprintReadWrite)
 	float Durability;
+
+	FGuid Id;
+	
+	bool operator ==(const FItemStruct& Other) const
+	{
+		return this->Id == Other.Id;
+	}
 };
