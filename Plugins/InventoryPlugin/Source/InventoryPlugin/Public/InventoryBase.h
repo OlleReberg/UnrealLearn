@@ -7,8 +7,9 @@
 #include "Components/ActorComponent.h"
 #include "InventoryBase.generated.h"
 
-//DECLARE_DYNAMIC_DELEGATE(FDelegateSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMultiCastDelegateSignature);
+#define PRINT GEngine->AddOnScreenDebugMessage(-1, 15, FColor::Red, "Test")
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryChangedSignature, FItemStruct, Item);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class INVENTORYPLUGIN_API UInventoryBase : public UActorComponent
@@ -19,9 +20,9 @@ class INVENTORYPLUGIN_API UInventoryBase : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UInventoryBase();
-
+	
 	UPROPERTY(BlueprintAssignable)
-	FMultiCastDelegateSignature DelegateSignature;
+	FOnInventoryChangedSignature OnInventoryChanged;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
