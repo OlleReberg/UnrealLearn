@@ -4,13 +4,7 @@
 #include "InventoryBase.h"
 #include "InventoryStructs.h"
 
-void FItemStruct::StructFunction()
-{
-}
 
-void UInventoryBase::ClassFunction()
-{
-}
 // Sets default values for this component's properties
 UInventoryBase::UInventoryBase()
 {
@@ -38,5 +32,16 @@ void UInventoryBase::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+TArray<FItemStruct>& UInventoryBase::GetItems()
+{
+	return Items;
+}
+
+bool UInventoryBase::AddItem(const FItemStruct& NewItem)
+{
+	Items.Add(NewItem);
+	return true;
 }
 

@@ -2,14 +2,14 @@
 #include "ItemPDABase.h"
 #include "InventoryStructs.generated.h"
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FItemStruct
 {
 	GENERATED_BODY()
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UItemPDABase* ItemPDA;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 	float Durability;
 };

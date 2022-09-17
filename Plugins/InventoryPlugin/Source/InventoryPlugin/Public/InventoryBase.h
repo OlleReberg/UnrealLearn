@@ -7,7 +7,10 @@
 #include "Components/ActorComponent.h"
 #include "InventoryBase.generated.h"
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+//DECLARE_DYNAMIC_DELEGATE(FDelegateSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMultiCastDelegateSignature);
+
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class INVENTORYPLUGIN_API UInventoryBase : public UActorComponent
 {
 	GENERATED_BODY()
@@ -17,8 +20,8 @@ public:
 	// Sets default values for this component's properties
 	UInventoryBase();
 
-	void ClassFunction();
-
+	UPROPERTY(BlueprintAssignable)
+	FMultiCastDelegateSignature DelegateSignature;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -27,5 +30,14 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	TArray<FItemStruct>& GetItems();
+
+	UFUNCTION(BlueprintCallable)
+	bool AddItem(const FItemStruct& NewItem);
+	
+private:
+	TArray<FItemStruct> Items;
 };
 
