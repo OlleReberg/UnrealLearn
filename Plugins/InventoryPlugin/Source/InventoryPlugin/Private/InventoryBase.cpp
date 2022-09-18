@@ -3,7 +3,6 @@
 #include "InventoryBase.h"
 #include "InventoryStructs.h"
 
-
 // Sets default values for this component's properties
 UInventoryBase::UInventoryBase()
 {
@@ -82,4 +81,10 @@ void UInventoryBase::Debug()
 		PRINT(0, DebugColor.ToFColorSRGB(), ItemIndex.ItemPDA->Text.ToString());
 	}
 }
+
+FString UInventoryBase::TextToPrint()
+{
+	return "Hello Bird";
+}
+
 

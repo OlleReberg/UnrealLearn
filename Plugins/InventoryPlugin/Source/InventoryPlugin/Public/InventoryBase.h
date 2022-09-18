@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GP21_Interface.h"
 #include "InventoryStructs.h"
 #include "Components/ActorComponent.h"
 #include "InventoryBase.generated.h"
@@ -12,7 +13,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryChangedSignature, FItemStruct, Item);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
-class INVENTORYPLUGIN_API UInventoryBase : public UActorComponent
+class INVENTORYPLUGIN_API UInventoryBase : public UActorComponent, public IGP21_Interface
 {
 	GENERATED_BODY()
 
@@ -56,5 +57,7 @@ private:
 	TArray<FItemStruct> Items;
 
 	void Debug();
+
+	virtual FString TextToPrint() override;
 };
 
