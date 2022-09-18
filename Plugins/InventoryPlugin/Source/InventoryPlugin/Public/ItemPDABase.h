@@ -21,4 +21,8 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Basic😒")	
 	UTexture2D* Thumbnail;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Basic😒")
+	bool Use(APawn* Pawn);
+	
 };

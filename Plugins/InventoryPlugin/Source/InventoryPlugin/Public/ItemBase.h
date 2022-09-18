@@ -21,6 +21,9 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
