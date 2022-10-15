@@ -8,7 +8,17 @@ public class UnrealLearn : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AIModule", "NavigationSystem" });
+		PublicDependencyModuleNames.AddRange(new string[]
+		{
+			"Core", 
+			"CoreUObject", 
+			"Engine", 
+			"InputCore",
+			"AIModule", 
+			"NavigationSystem",
+			"InventoryPlugin"
+			
+		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

@@ -41,6 +41,13 @@
 		{
 			"Name": "Water",
 			"Enabled": true
+		},
+		{
+			"Name": "InventoryPlugin",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
 		}
 	]
 }

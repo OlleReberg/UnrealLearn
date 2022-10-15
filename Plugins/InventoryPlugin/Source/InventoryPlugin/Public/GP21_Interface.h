@@ -22,9 +22,7 @@ class INVENTORYPLUGIN_API IGP21_Interface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 
-	UFUNCTION(BlueprintCallable)
-	virtual void PrintStuff();
-
+	
 	virtual FString TextToPrint()=0;
 	
 };
