@@ -35,6 +35,9 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ACharacterBase::ServerInteract_Implementation(AActor* HitActor, ACharacter* Interactor)
 {
+	if (!UKismetSystemLibrary::DoesImplementInterface(HitActor, UInteractIF::StaticClass()))
+		return;
+	
 	IInteractIF::Execute_Interact(HitActor, Interactor);
 }
 

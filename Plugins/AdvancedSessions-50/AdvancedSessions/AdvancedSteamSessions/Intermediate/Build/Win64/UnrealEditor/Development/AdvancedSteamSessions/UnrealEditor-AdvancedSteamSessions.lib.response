@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-AdvancedSteamSessions.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\School-Projects\UnrealLearn\Intermediate\Build\Win64\UnrealLearnEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"D:\School-Projects\UnrealLearn\Plugins\AdvancedSessions-50\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.cpp.obj"
+"D:\School-Projects\UnrealLearn\Plugins\AdvancedSessions-50\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
+"D:\School-Projects\UnrealLearn\Plugins\AdvancedSessions-50\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Default.rc2.res"
+/OUT:"D:\School-Projects\UnrealLearn\Plugins\AdvancedSessions-50\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib"
