@@ -20,17 +20,32 @@ void UGPAbilitySystemBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	if (!GrantAbilities())
+		GEngine->AddOnScreenDebugMessage(
+			-1, 10, FColor::Red,
+		 FString::Printf(TEXT("%s has no abilities"), *GetOwner()->GetName())
+		);
+
+	UE_LOG(LogTemp, Warning, TEXT("Missing Abilities!"));
 }
 
-
-// Called every frame
-void UGPAbilitySystemBase::TickComponent(float DeltaTime, ELevelTick TickType,
-                                              FActorComponentTickFunction* ThisTickFunction)
+bool UGPAbilitySystemBase::GrantAbilities()
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	for (const TSubclassOf<UGameplayAbility>& Ability : GrantedAbilities)
+	{
+		checkf(Ability, TEXT("Missing Ability Slot %s"), *GetOwner()->GetName())
 
-	// ...
+		FGameplayAbilitySpec* FoundSpec = FindAbilitySpecFromClass(Ability);
+		if (FoundSpec)
+		{
+			if (FoundSpec->Ability->GetClass() == Ability)
+				continue;
+		}
+		
+		FGameplayAbilitySpec AbilitySpec{Ability};
+		GiveAbility(AbilitySpec);
+	}
+	return !GrantedAbilities.IsEmpty();
 }
+
 
