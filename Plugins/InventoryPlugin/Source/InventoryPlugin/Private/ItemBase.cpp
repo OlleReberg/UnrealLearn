@@ -1,6 +1,8 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ItemBase.h"
+
+#include "GameplayTagContainer.h"
 // Sets default values
 AItemBase::AItemBase()
 {
@@ -15,6 +17,12 @@ void AItemBase::BeginPlay()
 	
 }
 
+void AItemBase::SetOwnedGameplayTags(const FGameplayTagContainer& NewContainer)
+{
+	OwnedGPTs = NewContainer;
+}
+
+
 void AItemBase::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
@@ -27,5 +35,10 @@ void AItemBase::OnConstruction(const FTransform& Transform)
 void AItemBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void AItemBase::GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const
+{
+	TagContainer = OwnedGPTs;
 }
 

@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagAssetInterface.h"
 #include "InventoryStructs.h"
 #include "Engine/StaticMeshActor.h"
 #include "ItemBase.generated.h"
 
 UCLASS()
-class INVENTORYPLUGIN_API AItemBase : public AStaticMeshActor
+class INVENTORYPLUGIN_API AItemBase : public AStaticMeshActor, public IGameplayTagAssetInterface
 {
 	GENERATED_BODY()
 
@@ -21,6 +22,9 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	
+	UFUNCTION(BlueprintCallable)
+	void SetOwnedGameplayTags(const FGameplayTagContainer& NewContainer);
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 	
@@ -29,4 +33,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(ExposeOnSpawn=true), Category="Basic😒")
 	FItemStruct Item;
+
+	virtual void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
+
+private:
+	FGameplayTagContainer OwnedGPTs;
 };

@@ -2,6 +2,7 @@
 
 #pragma once
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Engine/DataAsset.h"
 #include "ItemPDABase.generated.h"
 
@@ -21,6 +22,8 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Basic😒")	
 	UTexture2D* Thumbnail;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="Basic😒")
+	FGameplayTagContainer Tags;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Basic😒")
 	bool Use(APawn* Pawn);
