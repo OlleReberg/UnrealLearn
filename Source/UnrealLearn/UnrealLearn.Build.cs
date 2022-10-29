@@ -17,8 +17,6 @@ public class UnrealLearn : ModuleRules
 			"AIModule", 
 			"NavigationSystem",
 			"InventoryPlugin"
-			
-			
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]

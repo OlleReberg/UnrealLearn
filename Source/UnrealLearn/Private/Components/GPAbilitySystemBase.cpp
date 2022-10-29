@@ -21,31 +21,68 @@ void UGPAbilitySystemBase::BeginPlay()
 	Super::BeginPlay();
 
 	if (!GrantAbilities())
+	{
 		GEngine->AddOnScreenDebugMessage(
 			-1, 10, FColor::Red,
-		 FString::Printf(TEXT("%s has no abilities"), *GetOwner()->GetName())
+			FString::Printf(TEXT("%s has no abilities"), *GetOwner()->GetName())
 		);
+	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Missing Abilities!"));
+	if (!GrantAttributes())
+	{
+		GEngine->AddOnScreenDebugMessage(
+			-1, 10, FColor::Red,
+			FString::Printf(TEXT("%s has no attributes"), *GetOwner()->GetName())
+		);
+	}
+
+	GetGameplayAttributeValueChangeDelegate(UGPAttributeBase::GetHealthAttribute()).AddUObject(
+		this, &UGPAbilitySystemBase::OnHealthChanged
+	);
 }
 
 bool UGPAbilitySystemBase::GrantAbilities()
 {
 	for (const TSubclassOf<UGameplayAbility>& Ability : GrantedAbilities)
 	{
-		checkf(Ability, TEXT("Missing Ability Slot %s"), *GetOwner()->GetName())
+		checkf(Ability, TEXT("Missing ability slot %s"), *GetOwner()->GetName())
 
-		FGameplayAbilitySpec* FoundSpec = FindAbilitySpecFromClass(Ability);
+		const FGameplayAbilitySpec* FoundSpec = FindAbilitySpecFromClass(Ability);
 		if (FoundSpec)
 		{
 			if (FoundSpec->Ability->GetClass() == Ability)
 				continue;
 		}
-		
+
 		FGameplayAbilitySpec AbilitySpec{Ability};
 		GiveAbility(AbilitySpec);
 	}
+
 	return !GrantedAbilities.IsEmpty();
+}
+
+bool UGPAbilitySystemBase::GrantAttributes()
+{
+	if (GrantedAttribute.IsEmpty())
+		return false;
+
+	for (TSubclassOf<UAttributeSet>& Attribute : GrantedAttribute)
+	{
+		const bool HasAttribute = GetAttributeSubobject(Attribute) != nullptr;
+
+		if (HasAttribute)
+			continue;
+
+		UAttributeSet* NewAttribute = NewObject<UAttributeSet>(GetOwner(), Attribute);
+		NewAttribute->InitFromMetaDataTable(DTAttribute);
+		AddAttributeSetSubobject(NewAttribute);
+	}
+	return true;
+}
+
+void UGPAbilitySystemBase::OnHealthChanged(const FOnAttributeChangeData& Data) const
+{
+	OnHealthAttributeChanged.Broadcast(Data.Attribute, Data.NewValue);
 }
 
 
