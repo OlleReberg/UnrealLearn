@@ -52,6 +52,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	FLinearColor DebugColor;
+
+	UFUNCTION(BlueprintCallable)
+	void CallInterface();
 	
 private:
 	UPROPERTY(Replicated)
@@ -62,5 +65,6 @@ private:
 	virtual FString TextToPrint() override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
 };
 

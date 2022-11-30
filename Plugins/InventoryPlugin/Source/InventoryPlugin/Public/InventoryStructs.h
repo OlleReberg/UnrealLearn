@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "ItemPDABase.h"
+#include "Net/UnrealNetwork.h"
 #include "InventoryStructs.generated.h"
+
 
 USTRUCT(BlueprintType)
 struct FItemStruct
@@ -33,4 +35,6 @@ struct FItemStruct
 	{
 		return this->Id == Other.Id && ItemPDA;
 	}
+
+	bool IsValid() const;
 };

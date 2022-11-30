@@ -52,9 +52,13 @@ bool UInventoryBase::TransferItem(UInventoryBase* ToInventory, const FItemStruct
 
 bool UInventoryBase::AddItem(const FItemStruct& NewItem)
 {
-	Items.Add(NewItem);
-	OnInventoryChanged.Broadcast(NewItem);
-	return true;
+	if (NewItem.IsValid())
+	{
+		Items.Add(NewItem);
+		OnInventoryChanged.Broadcast(NewItem);
+		return true;
+	}
+	return false;
 }
 
 bool UInventoryBase::RemoveItem(const FItemStruct& Item)
@@ -81,7 +85,8 @@ void UInventoryBase::Debug()
 {
 	for (const FItemStruct ItemIndex : GetItems())
 	{
-		//PRINT(0, DebugColor.ToFColorSRGB(), ItemIndex.ItemPDA->Text.ToString());
+		// PRINT(0, DebugColor.ToFColorSRGB(), "Item Name: %s  %f", *ItemIndex.ItemPDA->Name.ToString()
+		// 	  , ItemIndex.Durability);
 	}
 }
 
@@ -94,6 +99,19 @@ void UInventoryBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UInventoryBase, Items);
+}
+void UInventoryBase::CallInterface()
+{
+	if (GetOwner()->GetClass()->ImplementsInterface(UGP21_Interface::StaticClass()))
+	{
+		//execute interface
+	}
+
+	IGP21_Interface* GP21 = Cast<IGP21_Interface>(GetOwner());
+	if (GP21)
+	{
+		//execute interface
+	}
 }
 
 
